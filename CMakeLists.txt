@@ -10,9 +10,19 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt5 COMPONENTS Core Quick REQUIRED)
 
-add_executable(${PROJECT_NAME} "main.cpp" "qml.qrc" "city.cpp" "country.cpp" "continent.cpp" "gamesettings.cpp" "world.cpp" )
+add_executable(${PROJECT_NAME} "main.cpp" "qml.qrc")
 
 file(GLOB_RECURSE OTHER_FILES "./*.h*")
 
+add_subdirectory(world)
+add_subdirectory(settings)
+
 target_compile_definitions(${PROJECT_NAME} PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Core Qt5::Quick)
+target_link_libraries(${PROJECT_NAME} PUBLIC Qt5::Core Qt5::Quick world settings)
+add_dependencies(${PROJECT_NAME} world settings)
+
+target_include_directories(${PROJECT_NAME} PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_CURRENT_SOURCE_DIR}/world
+        ${CMAKE_CURRENT_SOURCE_DIR}/settings
+        )

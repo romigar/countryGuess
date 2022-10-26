@@ -1,4 +1,5 @@
 #include <QObject>
+#include <QDebug>
 #include "gamesettings.h"
 
 gameSettings::gameSettings(QObject *parent) : QObject(parent)
@@ -8,15 +9,41 @@ gameSettings::gameSettings(QObject *parent) : QObject(parent)
 
 /* ***************************************************************** */
 
-inline uint32_t gameSettings::getScore(void){ return score; }
-inline uint32_t gameSettings::getBestScore(void){ return bestScore; }
-inline uint32_t gameSettings::getChrono(void){ return chrono; }
-inline uint32_t gameSettings::getTimeLimit(void){ return timeLimit; }
-inline uint32_t gameSettings::getTimeRemaining(void){ return timeRemaining; }
-inline uint8_t gameSettings::getCountriesTotal(void){ return countriesTotal; }
-inline uint8_t gameSettings::getCountriesFound(void){ return countriesFound; }
-inline QString gameSettings::getPlayerName(void){ return playerName; }
-inline QString gameSettings::getBestScoreName(void){ return bestScoreName; }
+uint32_t gameSettings::getScore(void){ return score; }
+uint32_t gameSettings::getBestScore(void){ return bestScore; }
+uint32_t gameSettings::getChrono(void){ return chrono; }
+uint32_t gameSettings::getTimeLimit(void){ return timeLimit; }
+uint32_t gameSettings::getTimeRemaining(void){ return timeRemaining; }
+uint8_t gameSettings::getCountriesTotal(void){ return countriesTotal; }
+uint8_t gameSettings::getCountriesFound(void){ return countriesFound; }
+QString gameSettings::getPlayerName(void){ return playerName; }
+QString gameSettings::getBestScoreName(void){ return bestScoreName; }
+
+/* ***************************************************************** */
+
+void gameSettings::onBadAnswer(uint8_t points)
+{
+    setScore(score-points);
+    //afficher bonne réponse
+}
+
+/* ***************************************************************** */
+
+void gameSettings::onGoodAnswer(uint8_t points)
+{
+    setScore(score+points);
+    //afficher bonne réponse
+}
+
+/* ***************************************************************** */
+
+void gameSettings::onJokerAsked(void)
+{
+    // Générer une liste de 3 réponses fausses du mauvais continent
+    // Ajouter la bonne réponse
+    // Mélanger la liste
+    // Mettre à jour les textes boutons
+}
 
 /* ***************************************************************** */
 
