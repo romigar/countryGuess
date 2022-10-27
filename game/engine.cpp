@@ -8,6 +8,18 @@ engine::engine(QObject *parent) : QObject(parent)
 
 /* ***************************************************************** */
 
+void engine::onButtonAnswerClicked(QString answer, uint8_t points)
+{
+    if (true /*answer == goodAnswer */) {
+        emit goodAnswer(points);
+    }
+    else {
+        emit badAnswer(points);
+    }
+}
+
+/* ***************************************************************** */
+
 void engine::onBadAnswer(uint8_t points)
 {
     setScore(score-points);

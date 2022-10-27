@@ -4,6 +4,7 @@
 #include <QObject>
 
 class gameSettings;
+class squareJoker;
 
 class engine : public QObject
 {
@@ -17,6 +18,7 @@ public:
     explicit engine(QObject *parent = nullptr);
 
     gameSettings* settings;
+    squareJoker* square;
 
     uint32_t score;
     uint32_t chrono;
@@ -44,6 +46,7 @@ public slots:
     void onGoodAnswer(uint8_t points);
     void onBadAnswer(uint8_t points);
     void onJokerAsked();
+    void onButtonAnswerClicked(QString answer, uint8_t points);
 
 private:
 };

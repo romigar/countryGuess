@@ -18,11 +18,11 @@ add_subdirectory(world)
 add_subdirectory(game)
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
-target_link_libraries(${PROJECT_NAME} PUBLIC Qt5::Core Qt5::Quick world settings)
+target_link_libraries(${PROJECT_NAME} PUBLIC Qt5::Core Qt5::Quick world game)
 add_dependencies(${PROJECT_NAME} world game)
 
 target_include_directories(${PROJECT_NAME} PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}
         ${CMAKE_CURRENT_SOURCE_DIR}/world
-        ${CMAKE_CURRENT_SOURCE_DIR}/settings
+        ${CMAKE_CURRENT_SOURCE_DIR}/game
         )

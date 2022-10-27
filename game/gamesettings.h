@@ -20,6 +20,7 @@ public:
     QString playerName;
     uint32_t timeLimit;
     uint8_t countriesTotal;
+    QString region;
 
     uint32_t getBestScore(void);
     uint32_t getTimeLimit(void);
