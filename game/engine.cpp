@@ -31,7 +31,7 @@ void engine::setNewQuestion(void)
 
 void engine::onButtonAnswerClicked(QString answer, uint8_t points)
 {
-    if (true /*answer == goodAnswer */) {
+    if (rightAnswer == answer) {
         emit goodAnswer(points);
     }
     else {
@@ -125,4 +125,3 @@ void engine::setCountriesFound(uint8_t val)
     countriesFound = val;
     emit countriesFoundChanged();
 }
-
