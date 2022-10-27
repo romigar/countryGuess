@@ -2,12 +2,18 @@ import QtQuick 2.9
 import QtQuick.Window 2.2
 import QtQuick.Controls 1.6
 
+import Engine 1.0
+
 Window {
     id: window
     visible: true
     width: 640
     height: 480
     title: qsTr("Hello World")
+
+    Engine {
+        id: myEngine
+    }
 
     Text {
         id: element
@@ -31,7 +37,7 @@ Window {
         id: element2
         x: 0
         y: 0
-        text: qsTr("Chrono")
+        text: myEngine.chrono
         font.pixelSize: 12
     }
 
@@ -89,8 +95,24 @@ Window {
         x: 463
         y: 163
         width: 147
-        height: 107
+        height: 24
         text: qsTr("Propositions carré")
+        font.pixelSize: 12
+    }
+
+    Text {
+        id: element6
+        x: 548
+        y: 15
+        text: qsTr("bestscoreafficher")
+        font.pixelSize: 12
+    }
+
+    Text {
+        id: element7
+        x: 287
+        y: 15
+        text: myEngine.score
         font.pixelSize: 12
     }
 }
