@@ -17,6 +17,13 @@ public:
                      uint8_t c_id, QString c_name, uint32_t c_pop,
                      QObject *parent = nullptr);
 
+    QString name;
+    uint8_t id;
+    uint32_t population;
+    QString continent;
+    uint8_t continentId;
+    city* capital;
+
     uint8_t getId(void);
     void setId(uint8_t newId);
     QString getName(void);
@@ -31,12 +38,7 @@ signals:
 public slots:
 
 private:
-    QString name;
-    uint8_t id;
-    uint32_t population;
-    QString continent;
-    uint8_t continentId;
-    city* capital;
+
 };
 
 #endif // COUNTRY_H

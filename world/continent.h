@@ -11,6 +11,10 @@ class continent : public QObject
 public:
     explicit continent(QObject *parent = nullptr);
 
+    QList<country> list;
+    QString name;
+    uint8_t id;
+
     uint8_t getId(void);
     void setId(uint8_t newId);
     QString getName(void);
@@ -21,9 +25,7 @@ signals:
 public slots:
 
 private:
-    QList<country> list;
-    QString name;
-    uint8_t id;
+
 };
 
 #endif // CONTINENT_H

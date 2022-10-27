@@ -30,8 +30,6 @@ country::country(uint8_t _id, QString _name, uint32_t _population,
     setContinent(_continent);
 }
 
-
-
 /* ***************************************************************** */
 
 inline uint8_t country::getId(void){   return id;  }
