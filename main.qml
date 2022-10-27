@@ -55,7 +55,7 @@ Window {
         id: element3
         x: 291
         y: 124
-        text: qsTr("Pays")
+        text: myEngine.question
         anchors.horizontalCenter: parent.horizontalCenter
         font.pixelSize: 12
     }
@@ -113,6 +113,15 @@ Window {
         x: 287
         y: 15
         text: myEngine.score
+        font.pixelSize: 12
+    }
+
+    Text {
+        id: element8
+        x: 314
+        y: 213
+        text: myEngine.rightAnswer
+        anchors.horizontalCenter: parent.horizontalCenter
         font.pixelSize: 12
     }
 }

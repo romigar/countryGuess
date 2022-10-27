@@ -20,8 +20,17 @@ add_library(${PROJECT_NAME} STATIC
     ${OTHER_FILES}
     )
 
+target_include_directories(${PROJECT_NAME} PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_CURRENT_SOURCE_DIR}/../world
+        )
+
 target_link_libraries(${PROJECT_NAME} PUBLIC
     Qt5::Core
     Qt5::Network
+    world
     )
+
+add_dependencies(${PROJECT_NAME} world)
+
 
