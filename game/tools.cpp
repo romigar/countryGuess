@@ -2,12 +2,7 @@
 #include <QString>
 #include "tools.h"
 
-
-
-
-
-
-uint32_t DistanceDeDamerauLevenshtein(QByteArray reference, QByteArray candidat)
+static uint32_t distanceDamerauLevenshtein(QByteArray reference, QByteArray candidat)
 {
     int i = 0;
     int j = 0;
@@ -51,4 +46,13 @@ uint32_t DistanceDeDamerauLevenshtein(QByteArray reference, QByteArray candidat)
     return d[a-1][b-1];
 }
 
+static double relativeDistance(QByteArray reference, QByteArray candidat)
+{
+    return (double)distanceDamerauLevenshtein(reference,candidat)/(double)reference.size();
+}
+
+bool validDistance(QByteArray reference, QByteArray candidat, double tolerance)
+{
+    return (relativeDistance(reference,candidat) <= tolerance);
+}
 
