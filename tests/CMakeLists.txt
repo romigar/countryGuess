@@ -10,26 +10,21 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 find_package(Qt5 COMPONENTS Core Network Sql REQUIRED)
 
+add_executable(${PROJECT_NAME} "test-distance.cpp" )
+
 # ------------------------------------------------------------------------------
 
 aux_source_directory(. SRCS)
 file(GLOB_RECURSE OTHER_FILES "./*.h*")
 
-add_library(${PROJECT_NAME} STATIC
-    ${SRCS}
-    ${OTHER_FILES}
-    )
-
 target_include_directories(${PROJECT_NAME} PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}
-        ${CMAKE_CURRENT_SOURCE_DIR}/../world
 	${CMAKE_CURRENT_SOURCE_DIR}/../game
         )
 
 target_link_libraries(${PROJECT_NAME} PUBLIC
     Qt5::Core
     Qt5::Network
-    world
     game
     )
 
