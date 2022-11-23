@@ -26,9 +26,9 @@ public:
 
 
 signals:
+    void activatedChanged(void);
 
 public slots:
-    void activatedChanged(void);
 };
 
 #endif // SQUAREJOKER_H
