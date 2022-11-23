@@ -16,6 +16,7 @@ file(GLOB_RECURSE OTHER_FILES "./*.h*")
 
 add_subdirectory(world)
 add_subdirectory(game)
+add_subdirectory(tests)
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 target_link_libraries(${PROJECT_NAME} PUBLIC Qt5::Core Qt5::Quick world game)
