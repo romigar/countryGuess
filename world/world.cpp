@@ -2,7 +2,7 @@
 #include "country.h"
 #include "continent.h"
 
-world::world(QObject *parent) : QObject(parent)
+world::world()
 {
 
 }

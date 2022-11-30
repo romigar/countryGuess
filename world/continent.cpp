@@ -1,10 +1,18 @@
+#include <iostream>
 #include "continent.h"
 #include "country.h"
 
-continent::continent(QObject *parent) : QObject(parent)
+continent::continent(void)
 {
 
 }
+
+continent::continent(std::string _name, uint8_t _id)
+{
+    setId(_id);
+    setName(_name);
+}
+
 
 /* ***************************************************************** */
 
@@ -16,10 +24,19 @@ inline void continent::setId(uint8_t newId){    id = newId;  }
 
 /* ***************************************************************** */
 
-inline QString continent::getName(void){    return name; }
+inline std::string continent::getName(void){    return name; }
 
 /* ***************************************************************** */
 
-inline void continent::setName(QString newName){    name = newName;  }
+inline void continent::setName(std::string newName){    name = newName;  }
 
 /* ***************************************************************** */
+
+void continent::display(void)
+{
+    std::cout<<"Country:{ ";
+    std::cout<<"  name :"<< getName() <<","<<std::endl;
+    std::cout<<"  id :"<< +getId() <<","<<std::endl;
+    std::cout<<"  nb_countries :"<< list.size() <<","<<std::endl;
+    std::cout<<"}"<<std::endl;
+}

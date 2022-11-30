@@ -19,13 +19,15 @@ file(GLOB_RECURSE OTHER_FILES "./*.h*")
 
 target_include_directories(${PROJECT_NAME} PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}
-	${CMAKE_CURRENT_SOURCE_DIR}/../game
+        ${CMAKE_CURRENT_SOURCE_DIR}/../game
+        ${CMAKE_CURRENT_SOURCE_DIR}/../world
         )
 
 target_link_libraries(${PROJECT_NAME} PUBLIC
     Qt5::Core
     Qt5::Network
     game
+    world
     )
 
 add_dependencies(${PROJECT_NAME} world game)

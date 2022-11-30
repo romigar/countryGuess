@@ -2,23 +2,27 @@
 #define CONTINENT_H
 
 #include <QObject>
+#include <vector>
+#include "country.h"
 
 class country;
 
-class continent : public QObject
+class continent
 {
-    Q_OBJECT
 public:
-    explicit continent(QObject *parent = nullptr);
+    continent();
+    continent(std::string name, uint8_t id);
 
-    QList<country> list;
-    QString name;
+    std::vector<country> list;
+    std::string name;
     uint8_t id;
 
     uint8_t getId(void);
     void setId(uint8_t newId);
-    QString getName(void);
-    void setName(QString newName);
+    std::string getName(void);
+    void setName(std::string newName);
+
+    void display(void);
 
 signals:
 

@@ -3,24 +3,25 @@
 
 #include <QObject>
 
-class city : public QObject
+class city
 {
-    Q_OBJECT
 public:
-    explicit city(QObject *parent = nullptr);
-    explicit city(uint8_t _id, QString _name, uint32_t _population, QObject *parent = nullptr);
+    city();             // public constructor
+    city(const city&);  // public copy constructor
+    city(uint8_t _id, std::string _name, uint32_t _population);
+    ~city();
 
-    QString name;
+    std::string name;
     uint8_t id;
     uint32_t population;
 
     uint8_t getId(void);
     void setId(uint8_t newId);
-    QString getName(void);
-    void setName(QString newName);
+    std::string getName(void);
+    void setName(std::string newName);
     uint32_t getPopulation(void);
     void setPopulation(uint32_t newPopulation);
-
+    void display();
 signals:
 
 public slots:

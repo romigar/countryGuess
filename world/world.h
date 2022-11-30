@@ -2,17 +2,17 @@
 #define WORLD_H
 
 #include <QObject>
+#include <vector>
 
 class country;
 class continent;
 
-class world : public QObject
+class world
 {
-    Q_OBJECT
 public:
-    explicit world(QObject *parent = nullptr);
-    QList<country> countryList;
-    QList<continent> continentList;
+    world();
+    std::vector<country> countryList;
+    std::vector<continent> continentList;
 
 signals:
 

@@ -5,6 +5,10 @@
 #include <cstdlib>
 #include <vector>
 
+#include "city.h"
+#include "country.h"
+#include "continent.h"
+
 
 
 uint32_t DistanceDeDamerauLevenshtein(QByteArray reference, QByteArray candidat)
@@ -118,7 +122,7 @@ int main(int argc, char *argv[])
     std::cout<<list;
     std::random_shuffle(list.begin(),list.end(),myrandom);
     */
-
+/*
     std::vector<int> list {1,2,3,4,5,6,7,8,9,10};
 
     std::cout<< list.size() << std::endl;
@@ -132,6 +136,28 @@ int main(int argc, char *argv[])
     std::cout<< list << std::endl;
     std::cout<< list.size() << std::endl;
     std::cout<< "end"<<std::endl;
+    */
+
+    city marseille(1,"Marseille",300000);
+    marseille.display();
+
+    country france(0,"France",70000000,"Europe",marseille);
+    france.display();
+
+    city nouvelleVille(marseille);
+    country nouveauPays(france);
+    nouveauPays.display();
+
+    city mtp(2,"Montpellier",200000);
+
+    marseille = mtp;
+    marseille.display();
+
+    continent europe;
+    europe.setName("Europe");
+
+    europe.display();
+
 
     return a.exec();
 }
