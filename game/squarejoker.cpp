@@ -8,50 +8,23 @@ squareJoker::squareJoker(QObject *parent) : QObject(parent)
 
 /* ***************************************************************** */
 
-squareJoker::squareJoker(bool _isActivated, QString _region, QObject *parent)
+squareJoker::squareJoker(bool _isActivated, QObject *parent)
     : QObject (parent)
 {
     isActivated = _isActivated;
-    region = _region;
 }
 
 /* ***************************************************************** */
 
-squareJoker::squareJoker(bool _isActivated, QString _region, QString _goodAnswer, QObject *parent)
-    : QObject (parent)
+void squareJoker::generateList(std::string ans1, std::string ans2, std::string ans3, std::string ans4)
 {
-    isActivated = _isActivated;
-    region = _region;
-    goodAnswer = _goodAnswer;
-}
-
-/* ***************************************************************** */
-
-void squareJoker::generateList(void)
-{
-
-    // Générer une liste de 3 réponses fausses du meme continent
-    // Ajouter la bonne réponse
-    // Mélanger la liste
-    // Mettre à jour les textes boutons
-    squareList.insert(0,goodAnswer);
-    squareList.insert(1,"");
-    squareList.insert(2,"");
-    squareList.insert(3,"");
-
-    // Random pick
-    // countryList.at(QRandomGenerator::global()->bounded(countryList.size1 +1));
-
-    std::srand ( unsigned ( std::time(0)));
-    std::random_shuffle(squareList.begin(), squareList.end());
-
-}
-
-/* ***************************************************************** */
-
-void squareJoker::setGoodAnswer(QString val)
-{
-    goodAnswer = val;
+    squareList.clear();
+    squareList.push_back(ans1);
+    squareList.push_back(ans2);
+    squareList.push_back(ans3);
+    squareList.push_back(ans4);
+    std::srand(std::time(nullptr)); // use current time as seed for random generator
+    std::random_shuffle(squareList.begin(),squareList.end());
 }
 
 /* ***************************************************************** */
@@ -71,12 +44,14 @@ bool squareJoker::getActivated(void)
 
 /* ***************************************************************** */
 
-void squareJoker::activateSquareJoker(QString answer)
+void squareJoker::activateSquareJoker(std::string ans1, std::string ans2, std::string ans3, std::string ans4)
 {
-    setGoodAnswer(answer);
-    generateList();
+    generateList(ans1,ans2,ans3,ans4);
     setActivated(true);
 }
 
 /* ***************************************************************** */
 
+
+void activateSquareJoker(std::string ans1, std::string ans2, std::string ans3, std::string ans4);
+void generateList(std::string ans1, std::string ans2, std::string ans3, std::string ans4);

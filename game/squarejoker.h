@@ -10,17 +10,13 @@ class squareJoker : public QObject
 
 public:
     explicit squareJoker(QObject *parent = nullptr);
-    explicit squareJoker(bool isActivated, QString region, QObject *parent = nullptr);
-    explicit squareJoker(bool isActivated, QString region, QString goodAnswer, QObject *parent = nullptr);
+    explicit squareJoker(bool isActivated, QObject *parent = nullptr);
 
     bool isActivated;
-    QStringList squareList;
-    QString goodAnswer;
-    QString region;
+    std::vector<std::string> squareList;
 
-    void activateSquareJoker(QString answer);
-    void generateList(void);
-    void setGoodAnswer(QString val);
+    void activateSquareJoker(std::string ans1, std::string ans2, std::string ans3, std::string ans4);
+    void generateList(std::string ans1, std::string ans2, std::string ans3, std::string ans4);
     void setActivated(bool active);
     bool getActivated(void);
 

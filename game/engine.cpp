@@ -7,6 +7,7 @@
 #include "country.h"
 #include "city.h"
 #include "squarejoker.h"
+#include "tools.h"
 
 using namespace std;
 
@@ -41,7 +42,7 @@ void engine::setNewQuestion(void)
 
 void engine::onButtonAnswerClicked(QString answer, uint8_t points)
 {
-    if (rightAnswer == answer) {
+    if (validDistance(rightAnswer.toLocal8Bit(),answer.toLocal8Bit(),0.2)) {
         emit goodAnswer(points);
     }
     else {
@@ -70,10 +71,13 @@ void engine::onGoodAnswer(uint8_t points)
 
 void engine::onJokerAsked(void)
 {
-    // Générer une liste de 3 réponses fausses du meme continent
-    // Ajouter la bonne réponse
-    // Mélanger la liste
-    // Mettre à jour les textes boutons
+
+    std::string ans1 = m_continent->list.at(0).getName();
+    std::string ans2 = m_continent->list.at(1).getName();
+    std::string ans3 = m_continent->list.at(2).getName();
+    square->activateSquareJoker(ans1,ans2,ans3,rightAnswer.toStdString());
+
+    //TODO : display list on buttons
 }
 
 /* ***************************************************************** */
