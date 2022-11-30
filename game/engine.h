@@ -16,8 +16,8 @@ class engine : public QObject
     Q_PROPERTY(uint32_t chrono READ getChrono WRITE setChrono NOTIFY chronoChanged)
     Q_PROPERTY(uint32_t timeRemaining READ getTimeRemaining WRITE setTimeRemaining NOTIFY timeRemainingChanged)
     Q_PROPERTY(uint8_t countriesFound READ getCountriesFound WRITE setCountriesFound NOTIFY countriesFoundChanged)
-    Q_PROPERTY(uint8_t rightAnswer READ getRightAnswer WRITE setRightAnswer NOTIFY rightAnswerChanged)
-    Q_PROPERTY(uint8_t question READ getQuestion WRITE setQuestion NOTIFY questionChanged)
+    Q_PROPERTY(QString rightAnswer READ getRightAnswer WRITE setRightAnswer NOTIFY rightAnswerChanged)
+    Q_PROPERTY(QString question READ getQuestion WRITE setQuestion NOTIFY questionChanged)
 
 public:
     explicit engine(QObject *parent = nullptr);
