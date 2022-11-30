@@ -10,6 +10,7 @@ class country
 
 public:
     country();
+    country(const country&);
     country(uint8_t _id, std::string _name, uint32_t _population,
                      std::string _continent, city capital);
     ~country();
@@ -35,6 +36,7 @@ public:
   //  void swap(country& other);
 
     void display(void);
+    void display_name(void);
 
 signals:
 

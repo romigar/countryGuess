@@ -19,10 +19,7 @@ city::city(const city& other)
 city::city(){ }
 
 
-city::~city()
-{
-    std::cout<<"city deleted"<<std::endl;
-}
+city::~city(){ }
 
 
 /* ***************************************************************** */
@@ -58,4 +55,9 @@ void city::display(void)
     std::cout<<"  population : "<< this->getPopulation() <<","<<std::endl;
     std::cout<<"  id : "<< +this->getId() <<std::endl;
     std::cout<<"}"<<std::endl;
+}
+
+void city::display_name(void)
+{
+    std::cout<<getName()<<std::endl;
 }

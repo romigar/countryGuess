@@ -139,24 +139,16 @@ int main(int argc, char *argv[])
     */
 
     city marseille(1,"Marseille",300000);
-    marseille.display();
-
+    city londres(2,"Londres",500000);
+    city madrid(3,"Madrid",400000);
     country france(0,"France",70000000,"Europe",marseille);
-    france.display();
-
-    city nouvelleVille(marseille);
-    country nouveauPays(france);
-    nouveauPays.display();
-
-    city mtp(2,"Montpellier",200000);
-
-    marseille = mtp;
-    marseille.display();
-
-    continent europe;
-    europe.setName("Europe");
-
+    country espagne(0,"Espagne",50000000,"Europe",city(3,"Madrid",400000));
+    country angleterre(0,"Angleterre",60000000,"Europe",marseille);
+    std::vector<country> list {france,espagne,angleterre};
+    continent europe("Europe",2,list);
     europe.display();
+    europe.display_list_country_name();
+
 
 
     return a.exec();

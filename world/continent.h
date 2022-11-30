@@ -11,7 +11,8 @@ class continent
 {
 public:
     continent();
-    continent(std::string name, uint8_t id);
+    continent(std::string _name, uint8_t _id);
+    continent(std::string _name, uint8_t _id, std::vector<country> _list);
 
     std::vector<country> list;
     std::string name;
@@ -23,6 +24,8 @@ public:
     void setName(std::string newName);
 
     void display(void);
+    void display_list(void);
+    void display_list_country_name(void);
 
 signals:
 

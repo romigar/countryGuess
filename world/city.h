@@ -22,6 +22,7 @@ public:
     uint32_t getPopulation(void);
     void setPopulation(uint32_t newPopulation);
     void display();
+    void display_name();
 signals:
 
 public slots:

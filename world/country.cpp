@@ -6,6 +6,15 @@ country::country()
 {
 }
 
+country::country(const country& other)
+    : capital(new city(*other.capital))
+{
+    setId(other.id);
+    setName(other.name);
+    setPopulation(other.population);
+    setContinent(other.continent);
+}
+
 country::country(uint8_t _id, std::string _name, uint32_t _population,
                  std::string _continent, city capital)
     : capital(new city(capital))
@@ -68,7 +77,6 @@ void country::swap(country& other)
 */
 /* ***************************************************************** */
 
-
 void country::display(void)
 {
     std::cout<<"Country:{ ";
@@ -80,4 +88,11 @@ void country::display(void)
     std::cout<<"  capital : ";
     this->capital->display();
     std::cout<<"}"<<std::endl;
+}
+
+/* ***************************************************************** */
+
+void country::display_name(void)
+{
+    std::cout<<getName()<<std::endl;
 }
