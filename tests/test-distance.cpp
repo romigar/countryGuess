@@ -1,7 +1,9 @@
 #include <QCoreApplication>
 #include <QDebug>
 #include <iostream>
-
+#include <algorithm>
+#include <cstdlib>
+#include <vector>
 
 
 
@@ -79,13 +81,57 @@ bool result(QByteArray word1, QByteArray word2)
     }
 }
 
+std::ostream &operator<<(std::ostream &os, const std::list<std::string> &list)
+{
+    for (auto const &i: list) {
+        os << i << std::endl;
+    }
+    return os;
+}
+
+template < class T >
+std::ostream& operator << (std::ostream& os, const std::vector<T>& v)
+{
+    os << "[";
+    for (typename std::vector<T>::const_iterator ii = v.begin(); ii != v.end(); ++ii)
+    {
+        os << " " << *ii;
+    }
+    os << "]";
+    return os;
+}
+
+int myrandom (int i) { return std::rand()%i;}
+
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
+    std::cout<< "start"<<std::endl;
 
-    result("iran","irna");
+//    result("iran","irna");
+//    result("iran","ir");
+/*
+    std::srand ( unsigned ( std::time(0) ) );
+    std::list<std::string> list = { "blue", "red", "green" };
+    std::cout<<list;
+    std::random_shuffle(list.begin(),list.end(),myrandom);
+    */
+
+    std::vector<int> list {1,2,3,4,5,6,7,8,9,10};
+
+    std::cout<< list.size() << std::endl;
+    std::random_shuffle(list.begin(),list.end(),myrandom);
+    std::cout<< list << std::endl;
+    list.erase(list.begin()+2);
+    list.erase(list.begin()+2);
+    list.erase(list.begin()+2);
+    list.erase(list.begin()+2);
+    list.erase(list.begin()+2);
+    std::cout<< list << std::endl;
+    std::cout<< list.size() << std::endl;
+    std::cout<< "end"<<std::endl;
 
     return a.exec();
 }
