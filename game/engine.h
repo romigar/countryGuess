@@ -60,8 +60,6 @@ signals:
     void rightAnswerChanged();
     void questionChanged();
 
-
-
 public slots:
     void onGoodAnswer(uint8_t points);
     void onBadAnswer(uint8_t points);

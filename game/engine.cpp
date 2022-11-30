@@ -1,3 +1,4 @@
+#include <iostream>
 #include <QRandomGenerator>
 #include <QList>
 #include "engine.h"
@@ -5,9 +6,17 @@
 #include "continent.h"
 #include "country.h"
 #include "city.h"
+#include "squarejoker.h"
+
+using namespace std;
 
 
-engine::engine(QObject *parent) : QObject(parent)
+engine::engine(QObject *parent)
+    : QObject(parent)
+    , settings(new gameSettings(this))
+    , square(new squareJoker(this))
+    , m_continent(new continent())
+    , m_country(new country())
 {
 
 }
@@ -16,15 +25,16 @@ engine::engine(QObject *parent) : QObject(parent)
 
 void engine::setNewQuestion(void)
 {
-    uint8_t i = QRandomGenerator::global()->bounded(m_continent->list.size() + 1);
-    m_country->setId(m_continent->list.at(i).id);
-    m_country->setName(m_continent->list.at(i).name);
-    m_country->setContinent(m_continent->list.at(i).continent);
-    m_country->setPopulation(m_continent->list.at(i).population);
-    m_country->capital = m_continent->list.at(i).capital;
-    m_continent->list.removeAt(i);
-    setQuestion(m_country->getName());
-    setRightAnswer(m_country->capital->getName());
+    if (m_continent->list.empty()){
+        std::cout<<"Empty list"<<std::endl;
+        return;
+    }
+    std::srand(std::time(nullptr)); // use current time as seed for random generator
+    std::random_shuffle(m_continent->list.begin(),m_continent->list.end());
+    *m_country = m_continent->list.back();
+    m_continent->list.pop_back();
+    setQuestion(QString::fromStdString(m_country->getName()));
+    setRightAnswer(QString::fromStdString(m_country->capital->getName()));
 }
 
 /* ***************************************************************** */
@@ -60,7 +70,7 @@ void engine::onGoodAnswer(uint8_t points)
 
 void engine::onJokerAsked(void)
 {
-    // Générer une liste de 3 réponses fausses du mauvais continent
+    // Générer une liste de 3 réponses fausses du meme continent
     // Ajouter la bonne réponse
     // Mélanger la liste
     // Mettre à jour les textes boutons
@@ -68,15 +78,12 @@ void engine::onJokerAsked(void)
 
 /* ***************************************************************** */
 
-
-
 uint32_t engine::getScore(void){ return score; }
 uint32_t engine::getChrono(void){ return chrono; }
 uint32_t engine::getTimeRemaining(void){ return timeRemaining; }
 uint8_t engine::getCountriesFound(void){ return countriesFound; }
 QString engine::getRightAnswer(void){ return rightAnswer; }
 QString engine::getQuestion(void){ return question; }
-
 
 /* ***************************************************************** */
 
