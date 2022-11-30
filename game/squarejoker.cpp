@@ -30,7 +30,7 @@ squareJoker::squareJoker(bool _isActivated, QString _region, QString _goodAnswer
 void squareJoker::generateList(void)
 {
 
-    // Générer une liste de 3 réponses fausses du mauvais continent
+    // Générer une liste de 3 réponses fausses du meme continent
     // Ajouter la bonne réponse
     // Mélanger la liste
     // Mettre à jour les textes boutons
