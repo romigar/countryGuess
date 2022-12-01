@@ -11,6 +11,9 @@ class world
 {
 public:
     world();
+    world(std::vector<continent> _continentList);
+    world(std::vector<country> _countryList);
+    world(std::vector<country> _countryList, std::vector<continent> _continentList);
     std::vector<country> countryList;
     std::vector<continent> continentList;
 

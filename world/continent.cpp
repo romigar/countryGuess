@@ -23,17 +23,8 @@ continent::continent(std::string _name, uint8_t _id, std::vector<country> _list)
 /* ***************************************************************** */
 
 inline uint8_t continent::getId(void){   return id;  }
-
-/* ***************************************************************** */
-
 inline void continent::setId(uint8_t newId){    id = newId;  }
-
-/* ***************************************************************** */
-
 inline std::string continent::getName(void){    return name; }
-
-/* ***************************************************************** */
-
 inline void continent::setName(std::string newName){    name = newName;  }
 
 /* ***************************************************************** */

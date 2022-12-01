@@ -138,6 +138,11 @@ int main(int argc, char *argv[])
     std::cout<< "end"<<std::endl;
     */
 
+    std::srand(std::time(nullptr)); // use current time as seed for random generator
+
+
+
+
     city marseille(1,"Marseille",300000);
     city londres(2,"Londres",500000);
     city madrid(3,"Madrid",400000);
@@ -149,8 +154,11 @@ int main(int argc, char *argv[])
     europe.display();
     europe.display_list_country_name();
 
+    marseille = londres;
+    france = espagne;
 
-
+    std::random_shuffle(europe.list.begin(),europe.list.end());
+    europe.display_list_country_name();
     return a.exec();
 }
 

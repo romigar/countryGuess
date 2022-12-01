@@ -33,8 +33,6 @@ public:
     uint8_t getContinentId(void);
     void setContinentId(uint8_t newContinentId);
 
-  //  void swap(country& other);
-
     void display(void);
     void display_name(void);
 
@@ -45,8 +43,6 @@ public slots:
 private:
 
 };
-
-//void swap(country& lhs, country& rhs){ lhs.swap(rhs); }
 
 
 #endif // COUNTRY_H
