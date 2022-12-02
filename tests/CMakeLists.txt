@@ -32,5 +32,26 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
 
 add_dependencies(${PROJECT_NAME} world game)
 
+# ------------------------------------------------------------------------------
+
+add_executable(test-liste "test-liste.cpp" )
+aux_source_directory(. SRCS)
+file(GLOB_RECURSE OTHER_FILES "./*.h*")
+target_include_directories(test-liste PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_CURRENT_SOURCE_DIR}/../game
+        ${CMAKE_CURRENT_SOURCE_DIR}/../world
+        )
+target_link_libraries(test-liste PUBLIC
+    Qt5::Core
+    Qt5::Network
+    game
+    world
+    )
+add_dependencies(${PROJECT_NAME} world game)
+
+# ------------------------------------------------------------------------------
+
+
 
 
