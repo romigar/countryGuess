@@ -27,10 +27,6 @@ public:
     void display_list(void);
     void display_list_country_name(void);
 
-signals:
-
-public slots:
-
 private:
 
 };

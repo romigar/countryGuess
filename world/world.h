@@ -17,9 +17,9 @@ public:
     std::vector<country> countryList;
     std::vector<continent> continentList;
 
-signals:
+    void fillContinentList(void);
 
-public slots:
+    void display();
 
 private:
 

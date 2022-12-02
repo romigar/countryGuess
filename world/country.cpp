@@ -6,6 +6,8 @@ country::country()
 {
 }
 
+/* ***************************************************************** */
+
 country::country(const country& other)
     : capital(new city(*other.capital))
 {
@@ -14,6 +16,8 @@ country::country(const country& other)
     setPopulation(other.population);
     setContinent(other.continent);
 }
+
+/* ***************************************************************** */
 
 country::country(uint8_t _id, std::string _name, uint32_t _population,
                  std::string _continent, city capital)
@@ -24,6 +28,19 @@ country::country(uint8_t _id, std::string _name, uint32_t _population,
     setPopulation(_population);
     setContinent(_continent);
 }
+
+/* ***************************************************************** */
+
+country::country(uint8_t _id, std::string _name, std::string _continent, std::string _capital)
+    : capital(new city(_id,_capital,0))
+{
+    setId(_id);
+    setName(_name);
+    setPopulation(0);
+    setContinent(_continent);
+}
+
+/* ***************************************************************** */
 
 country::~country()
 {

@@ -13,6 +13,7 @@ public:
     country(const country&);
     country(uint8_t _id, std::string _name, uint32_t _population,
                      std::string _continent, city capital);
+    country(uint8_t _id, std::string _name, std::string _continent, std::string _capital);
     ~country();
 
     std::string name;
@@ -35,10 +36,6 @@ public:
 
     void display(void);
     void display_name(void);
-
-signals:
-
-public slots:
 
 private:
 

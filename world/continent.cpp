@@ -7,11 +7,15 @@ continent::continent(void)
 
 }
 
+/* ***************************************************************** */
+
 continent::continent(std::string _name, uint8_t _id)
 {
     setId(_id);
     setName(_name);
 }
+
+/* ***************************************************************** */
 
 continent::continent(std::string _name, uint8_t _id, std::vector<country> _list)
 {
