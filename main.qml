@@ -44,10 +44,11 @@ Window {
     Text {
         id: textQuestion
         x: 291
-        y: 124
+        y: 97
         text: myEngine.question
+        anchors.horizontalCenterOffset: 3
         anchors.horizontalCenter: parent.horizontalCenter
-        font.pixelSize: 12
+        font.pixelSize: 20
     }
 
     Button {
@@ -61,21 +62,10 @@ Window {
         anchors.horizontalCenter: parent.horizontalCenter
     }
 
-    Text {
-        id: element4
-        x: 297
-        y: 358
-        width: 206
-        height: 77
-        text: qsTr("Text")
-        anchors.horizontalCenter: parent.horizontalCenter
-        font.pixelSize: 12
-    }
-
     Button {
         id: buttonSquare
-        x: 463
-        y: 124
+        x: 15
+        y: 322
         width: 147
         height: 27
         onClicked: myEngine.onJokerAsked()
@@ -84,19 +74,20 @@ Window {
 
     Text {
         id: textPropositions
-        x: 463
-        y: 163
-        width: 147
+        x: 15
+        y: 348
+        width: 113
         height: 24
         text: qsTr("Propositions carré")
         font.pixelSize: 12
+        visible: myEngine.squareJokerActivated
     }
 
     Text {
         id: textBestScoreDisplay
         x: 548
         y: 15
-        text: qsTr("bestscoreafficher")
+        text: myEngine.bestScore
         font.pixelSize: 12
     }
 
@@ -111,11 +102,12 @@ Window {
     Text {
         id: textRightAnswer
         x: 314
-        y: 145
+        y: 132
         text: myEngine.rightAnswer
         anchors.horizontalCenterOffset: 0
         anchors.horizontalCenter: parent.horizontalCenter
-        font.pixelSize: 12
+        font.pixelSize: 20
+        visible: myEngine.visibleRightAnswer
     }
 
     TextField {
