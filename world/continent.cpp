@@ -9,6 +9,15 @@ continent::continent(void)
 
 /* ***************************************************************** */
 
+continent::continent(const continent& other)
+{
+    setId(other.id);
+    setName(other.name);
+    list = other.list;
+}
+
+/* ***************************************************************** */
+
 continent::continent(std::string _name, uint8_t _id)
 {
     setId(_id);

@@ -11,6 +11,7 @@ class continent
 {
 public:
     continent();
+    continent(const continent&);
     continent(std::string _name, uint8_t _id);
     continent(std::string _name, uint8_t _id, std::vector<country> _list);
 
