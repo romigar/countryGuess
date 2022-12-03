@@ -13,17 +13,16 @@
 using namespace std;
 
 
-engine::engine(QObject *parent)
-    : QObject(parent)
-    , settings(new gameSettings(this))
-    , square(new squareJoker(this))
+engine::engine(gameSettings *parent)
+    : gameSettings(parent)
+    , square(new squareJoker())
     , m_world(new world())
     , m_continent(new continent(m_world->continentList.at(0)))
     , m_country(new country())
 {
 
-    connect(this, SIGNAL(goodAnswer(uint8_t)), this, SLOT(onGoodAnswer(uint8_t)));
-    connect(this, SIGNAL(badAnswer(uint8_t)), this, SLOT(onBadAnswer(uint8_t)));
+    connect(this, SIGNAL(goodAnswer(int)), this, SLOT(onGoodAnswer(int)));
+    connect(this, SIGNAL(badAnswer(int)), this, SLOT(onBadAnswer(int)));
     setChrono(0);
     setTimeRemaining(0);
     setCountriesFound(0);
@@ -70,7 +69,7 @@ void engine::onButtonAnswerClicked(QString answer, int points)
 
 /* ***************************************************************** */
 
-void engine::onBadAnswer(uint8_t points)
+void engine::onBadAnswer(int points)
 {
     setScore(score-points);
     //afficher bonne réponse
@@ -78,7 +77,7 @@ void engine::onBadAnswer(uint8_t points)
 
 /* ***************************************************************** */
 
-void engine::onGoodAnswer(uint8_t points)
+void engine::onGoodAnswer(int points)
 {
     setScore(score+points);
     setCountriesFound(getCountriesFound()+1);
@@ -93,7 +92,7 @@ void engine::onGoodAnswer(uint8_t points)
 
 void engine::onJokerAsked(void)
 {
-    std::cout<<"Joker asked : "<< +score  <<std::endl;
+    std::cout<<"Joker asked : "<<std::endl;
 
     std::string ans1 = m_continent->list.at(0).getName();
     std::string ans2 = m_continent->list.at(1).getName();
@@ -105,12 +104,17 @@ void engine::onJokerAsked(void)
 
 /* ***************************************************************** */
 
-uint32_t engine::getScore(void){ return score; }
-uint32_t engine::getChrono(void){ return chrono; }
-uint32_t engine::getTimeRemaining(void){ return timeRemaining; }
-uint8_t engine::getCountriesFound(void){ return countriesFound; }
+int engine::getScore(void){ return score; }
+int engine::getChrono(void){ return chrono; }
+int engine::getTimeRemaining(void){ return timeRemaining; }
+int engine::getCountriesFound(void){ return countriesFound; }
 QString engine::getRightAnswer(void){ return rightAnswer; }
 QString engine::getQuestion(void){ return question; }
+QString engine::getSquareAnswer1(void){ return squareAnswer1; }
+QString engine::getSquareAnswer2(void){ return squareAnswer2; }
+QString engine::getSquareAnswer3(void){ return squareAnswer3; }
+QString engine::getSquareAnswer4(void){ return squareAnswer4; }
+
 
 /* ***************************************************************** */
 
@@ -130,7 +134,7 @@ void engine::setQuestion(QString val)
 
 /* ***************************************************************** */
 
-void engine::setScore(uint32_t val)
+void engine::setScore(int val)
 {
     score = val;
     emit scoreChanged();
@@ -138,7 +142,7 @@ void engine::setScore(uint32_t val)
 
 /* ***************************************************************** */
 
-void engine::setChrono(uint32_t val)
+void engine::setChrono(int val)
 {
     chrono = val;
     emit chronoChanged();
@@ -146,7 +150,7 @@ void engine::setChrono(uint32_t val)
 
 /* ***************************************************************** */
 
-void engine::setTimeRemaining(uint32_t val)
+void engine::setTimeRemaining(int val)
 {
     timeRemaining = val;
     emit timeRemainingChanged();
@@ -154,8 +158,42 @@ void engine::setTimeRemaining(uint32_t val)
 
 /* ***************************************************************** */
 
-void engine::setCountriesFound(uint8_t val)
+void engine::setCountriesFound(int val)
 {
     countriesFound = val;
     emit countriesFoundChanged();
 }
+
+/* ***************************************************************** */
+
+void engine::setSquareAnswer1(QString answer)
+{
+    squareAnswer1 = answer;
+    emit squareAnswer1Changed();
+}
+
+/* ***************************************************************** */
+
+void engine::setSquareAnswer2(QString answer)
+{
+    squareAnswer2 = answer;
+    emit squareAnswer2Changed();
+}
+
+/* ***************************************************************** */
+
+void engine::setSquareAnswer3(QString answer)
+{
+    squareAnswer3 = answer;
+    emit squareAnswer3Changed();
+}
+
+/* ***************************************************************** */
+
+void engine::setSquareAnswer4(QString answer)
+{
+    squareAnswer4 = answer;
+    emit squareAnswer4Changed();
+}
+
+/* ***************************************************************** */
