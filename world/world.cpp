@@ -7,14 +7,19 @@
 #include "country.h"
 #include "continent.h"
 
-
+/* ***************************************************************** */
+/*
+ * Extract countries list from a csv file, with format is :
+ * country,capital,continent
+ * */
 void fill_from_csv(std::vector<country> *_countryList)
 {
+    // Location file
     QFile envFile("/home/theo/workspace/countryGuess/ressources/liste.csv");
-    int i = 0 ;
+    int i = 0 ; //country counter
     if (envFile.open(QIODevice::ReadOnly)) {
         QTextStream in(&envFile);
-        while (!in.atEnd())
+        while (!in.atEnd()) // For each line, put a country in countryList
         {
             QString line = in.readLine();
             QStringList list = line.split(',');
@@ -24,8 +29,7 @@ void fill_from_csv(std::vector<country> *_countryList)
             _countryList->push_back(*new country(i,_country,_continent,_capital));
             i++;
         }
-        envFile.close();
-        std::cout<<  "Init list finished. Size : " << _countryList->size() <<std::endl;
+        envFile.close(); // Close the file
     }
     else {
         std::cout<<  "can not open file"<<std::endl;
@@ -33,11 +37,17 @@ void fill_from_csv(std::vector<country> *_countryList)
 }
 
 /* ***************************************************************** */
-
+/*
+ * From a countryList, fill a continentList
+ * Read "continent" attribute for each country in the list and put it
+ * in right continent.countrylist
+ * Create a new continent each time a new continent-name is met
+ * */
 void fillList(std::vector<country> countrylist,std::vector<continent> *_continentList)
 {
     bool known_region = false;
-    _continentList->clear();
+    _continentList->clear(); // Clear the continentList
+    // Create a first continent for the firt country met and put it in
     std::vector<std::vector<country>> newContList;
     std::vector<country> first;
     first.push_back(countrylist.at(0));
@@ -45,18 +55,21 @@ void fillList(std::vector<country> countrylist,std::vector<continent> *_continen
 
     for (int i = 1 ; i  < countrylist.size() ; i++) {
         known_region = false;
+        // Test if this country's continent is already created, is yes, put it in
         for (int k = 0; k < newContList.size(); k++) {
             if (!countrylist.at(i).getContinent().compare( newContList.at(k).at(0).getContinent() ) ) {
                 newContList.at(k).push_back(countrylist.at(i));
                 known_region = true;
             }
         }
+        // if this continent has not been created, then create it, and put the country in
         if (!known_region) {
             std::vector<country> newContinent;
             newContinent.push_back(countrylist.at(i));
             newContList.push_back(newContinent);
         }
     }
+    // Init the continentList with the created lists
     for (int k = 0; k < newContList.size(); k++) {
         _continentList->push_back(*new continent(newContList.at(k).at(0).getContinent(),k,newContList.at(k)));
     }
@@ -64,6 +77,10 @@ void fillList(std::vector<country> countrylist,std::vector<continent> *_continen
 
 /* ***************************************************************** */
 
+/*
+ * Read csv file to fill countryList
+ * than sort this countryList for filling continentList
+ * */
 void world::fillContinentList(void)
 {
     fill_from_csv(&countryList);
@@ -72,6 +89,7 @@ void world::fillContinentList(void)
 
 /* ***************************************************************** */
 
+// Default constructor
 world::world()
 {
     fillContinentList();
@@ -111,7 +129,6 @@ void world::display(void)
         continentList.at(i).display();
     }
     std::cout<<"}"<<std::endl;
-
 }
 
 /* ***************************************************************** */

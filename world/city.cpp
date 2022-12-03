@@ -1,7 +1,7 @@
 #include <iostream>
 #include "city.h"
 
-
+// constructor
 city::city(uint8_t _id, std::string _name, uint32_t _population)
 {
     setId(_id);
@@ -9,6 +9,9 @@ city::city(uint8_t _id, std::string _name, uint32_t _population)
     setPopulation(_population);
 }
 
+/* ***************************************************************** */
+
+// Copy constructor
 city::city(const city& other)
 {
     setName(other.name);
@@ -16,9 +19,12 @@ city::city(const city& other)
     setId(other.id);
 }
 
+/* ***************************************************************** */
+
+//default constructor
 city::city(){ }
 
-
+//default destructor
 city::~city(){ }
 
 
@@ -56,6 +62,8 @@ void city::display(void)
     std::cout<<"  id : "<< +this->getId() <<std::endl;
     std::cout<<"}"<<std::endl;
 }
+
+/* ***************************************************************** */
 
 void city::display_name(void)
 {

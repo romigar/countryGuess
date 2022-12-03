@@ -2,6 +2,7 @@
 #include "continent.h"
 #include "country.h"
 
+//Default constructor
 continent::continent(void)
 {
 
@@ -9,6 +10,7 @@ continent::continent(void)
 
 /* ***************************************************************** */
 
+//Copy constructor
 continent::continent(const continent& other)
 {
     setId(other.id);
@@ -18,6 +20,7 @@ continent::continent(const continent& other)
 
 /* ***************************************************************** */
 
+// Init Constructor
 continent::continent(std::string _name, uint8_t _id)
 {
     setId(_id);
@@ -26,6 +29,7 @@ continent::continent(std::string _name, uint8_t _id)
 
 /* ***************************************************************** */
 
+// Init Constructor with filled list
 continent::continent(std::string _name, uint8_t _id, std::vector<country> _list)
 {
     setId(_id);
@@ -35,6 +39,7 @@ continent::continent(std::string _name, uint8_t _id, std::vector<country> _list)
 
 /* ***************************************************************** */
 
+// geter and seter method
 inline uint8_t continent::getId(void){   return id;  }
 inline void continent::setId(uint8_t newId){    id = newId;  }
 inline std::string continent::getName(void){    return name; }
@@ -64,6 +69,8 @@ void continent::display_list(void)
     std::cout<<"}"<<std::endl;
 }
 
+/* ***************************************************************** */
+
 void continent::display_list_country_name(void)
 {
     std::cout<<"Continent list : { "<<std::endl;
@@ -73,3 +80,5 @@ void continent::display_list_country_name(void)
     }
     std::cout<<"}"<<std::endl;
 }
+
+/* ***************************************************************** */
