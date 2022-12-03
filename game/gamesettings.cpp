@@ -4,7 +4,11 @@
 
 gameSettings::gameSettings(QObject *parent) : QObject(parent)
 {
-
+    setTimeLimit(0);
+    setBestScore(0);
+    setPlayerName("player1");
+    setBestScoreName("");
+    setCountriesTotal(0);
 }
 
 /* ***************************************************************** */
@@ -52,7 +56,7 @@ void gameSettings::setPlayerName(QString val)
 void gameSettings::setBestScoreName(QString val)
 {
     bestScoreName = val;
-    emit bestScoreChanged();
+    emit bestScoreNameChanged();
 }
 
 /* ***************************************************************** */
