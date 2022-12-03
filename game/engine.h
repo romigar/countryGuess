@@ -24,7 +24,8 @@ public:
 
     gameSettings* settings;
     squareJoker* square;
-    continent* m_continent; // use take to remove a found country
+    world* m_world;
+    continent* m_continent;
     country* m_country;
     QString question;
     QString rightAnswer;
@@ -64,7 +65,7 @@ public slots:
     void onGoodAnswer(uint8_t points);
     void onBadAnswer(uint8_t points);
     void onJokerAsked();
-    void onButtonAnswerClicked(QString answer, uint8_t points);
+    void onButtonAnswerClicked(QString answer, int points);
 
 private:
 };

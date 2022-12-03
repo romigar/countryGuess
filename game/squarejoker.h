@@ -20,7 +20,6 @@ public:
     void setActivated(bool active);
     bool getActivated(void);
 
-
 signals:
     void activatedChanged(void);
 

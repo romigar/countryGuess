@@ -16,7 +16,7 @@ Window {
     }
 
     Text {
-        id: element
+        id: textBestScore
         x: 579
         y: 0
         width: 61
@@ -26,7 +26,7 @@ Window {
     }
 
     Text {
-        id: element1
+        id: textScore
         x: 308
         y: 0
         text: qsTr("Score")
@@ -34,25 +34,15 @@ Window {
     }
 
     Text {
-        id: element2
+        id: textChrono
         x: 0
         y: 0
         text: myEngine.chrono
         font.pixelSize: 12
     }
 
-    TextInput {
-        id: textInput
-        x: 210
-        y: 158
-        width: 226
-        height: 20
-        text: "Capitale"
-        font.pixelSize: 12
-    }
-
     Text {
-        id: element3
+        id: textQuestion
         x: 291
         y: 124
         text: myEngine.question
@@ -61,12 +51,13 @@ Window {
     }
 
     Button {
-        id: button
+        id: buttonValidate
         x: 248
         y: 252
         width: 150
         height: 32
         text: qsTr("Valider")
+        onClicked: myEngine.onButtonAnswerClicked(textFieldAnswer.text, 1)
         anchors.horizontalCenter: parent.horizontalCenter
     }
 
@@ -82,16 +73,17 @@ Window {
     }
 
     Button {
-        id: button1
+        id: buttonSquare
         x: 463
         y: 124
         width: 147
         height: 27
+        onClicked: myEngine.onJokerAsked()
         text: qsTr("Carré")
     }
 
     Text {
-        id: element5
+        id: textPropositions
         x: 463
         y: 163
         width: 147
@@ -101,7 +93,7 @@ Window {
     }
 
     Text {
-        id: element6
+        id: textBestScoreDisplay
         x: 548
         y: 15
         text: qsTr("bestscoreafficher")
@@ -109,7 +101,7 @@ Window {
     }
 
     Text {
-        id: element7
+        id: textScoreDisplay
         x: 287
         y: 15
         text: myEngine.score
@@ -117,11 +109,22 @@ Window {
     }
 
     Text {
-        id: element8
+        id: textRightAnswer
         x: 314
-        y: 213
+        y: 145
         text: myEngine.rightAnswer
+        anchors.horizontalCenterOffset: 0
         anchors.horizontalCenter: parent.horizontalCenter
         font.pixelSize: 12
+    }
+
+    TextField {
+        id: textFieldAnswer
+        x: 199
+        y: 176
+        width: 248
+        height: 25
+        text: "entrer une réponse"
+        placeholderText: qsTr("Text Field")
     }
 }

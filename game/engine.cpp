@@ -3,6 +3,7 @@
 #include <QList>
 #include "engine.h"
 #include "gamesettings.h"
+#include "world.h"
 #include "continent.h"
 #include "country.h"
 #include "city.h"
@@ -16,9 +17,19 @@ engine::engine(QObject *parent)
     : QObject(parent)
     , settings(new gameSettings(this))
     , square(new squareJoker(this))
-    , m_continent(new continent())
+    , m_world(new world())
+    , m_continent(new continent(m_world->continentList.at(0)))
     , m_country(new country())
 {
+
+    connect(this, SIGNAL(goodAnswer(uint8_t)), this, SLOT(onGoodAnswer(uint8_t)));
+    connect(this, SIGNAL(badAnswer(uint8_t)), this, SLOT(onBadAnswer(uint8_t)));
+    setChrono(0);
+    setTimeRemaining(0);
+    setCountriesFound(0);
+    setScore(0);
+    setNewQuestion();
+
 
 }
 
@@ -40,12 +51,19 @@ void engine::setNewQuestion(void)
 
 /* ***************************************************************** */
 
-void engine::onButtonAnswerClicked(QString answer, uint8_t points)
+void engine::onButtonAnswerClicked(QString answer, int points)
 {
-    if (validDistance(rightAnswer.toLocal8Bit(),answer.toLocal8Bit(),0.2)) {
+    std::cout<<"Answer : "<< answer.toStdString() <<std::endl;
+    std::cout<<"RightAnswer : "<< rightAnswer.toStdString() <<std::endl;
+
+
+    if (validDistance(rightAnswer.toLocal8Bit(),answer.toLocal8Bit(),0.3)) {
+        std::cout<<"Bonne réponse"  <<std::endl;
         emit goodAnswer(points);
     }
     else {
+        std::cout<<"Mauvaise réponse"  <<std::endl;
+
         emit badAnswer(points);
     }
 }
@@ -64,6 +82,10 @@ void engine::onGoodAnswer(uint8_t points)
 {
     setScore(score+points);
     setCountriesFound(getCountriesFound()+1);
+
+    std::cout<<"Score : "<< +score  <<std::endl;
+    std::cout<<"Nombre de capitales trouvées : "<< +getCountriesFound()<<std::endl;
+
     //afficher bonne réponse
 }
 
@@ -71,6 +93,7 @@ void engine::onGoodAnswer(uint8_t points)
 
 void engine::onJokerAsked(void)
 {
+    std::cout<<"Joker asked : "<< +score  <<std::endl;
 
     std::string ans1 = m_continent->list.at(0).getName();
     std::string ans2 = m_continent->list.at(1).getName();
