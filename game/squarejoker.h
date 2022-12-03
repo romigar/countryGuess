@@ -3,14 +3,11 @@
 
 #include <QObject>
 
-class squareJoker : public QObject
+class squareJoker
 {
-    Q_OBJECT
-    Q_PROPERTY(bool isActivated READ getActivated WRITE setActivated NOTIFY activatedChanged)
 
 public:
-    explicit squareJoker(QObject *parent = nullptr);
-    explicit squareJoker(bool isActivated, QObject *parent = nullptr);
+    squareJoker();
 
     bool isActivated;
     std::vector<std::string> squareList;
@@ -20,10 +17,6 @@ public:
     void setActivated(bool active);
     bool getActivated(void);
 
-signals:
-    void activatedChanged(void);
-
-public slots:
 };
 
 #endif // SQUAREJOKER_H

@@ -1,17 +1,9 @@
 #include "squarejoker.h"
 #include <QRandomGenerator>
 
-squareJoker::squareJoker(QObject *parent) : QObject(parent)
+squareJoker::squareJoker()
 {
-
-}
-
-/* ***************************************************************** */
-
-squareJoker::squareJoker(bool _isActivated, QObject *parent)
-    : QObject (parent)
-{
-    isActivated = _isActivated;
+    setActivated(0);
 }
 
 /* ***************************************************************** */
@@ -32,7 +24,6 @@ void squareJoker::generateList(std::string ans1, std::string ans2, std::string a
 void squareJoker::setActivated(bool active)
 {
     isActivated = active;
-    emit activatedChanged();
 }
 
 /* ***************************************************************** */
@@ -51,7 +42,3 @@ void squareJoker::activateSquareJoker(std::string ans1, std::string ans2, std::s
 }
 
 /* ***************************************************************** */
-
-
-void activateSquareJoker(std::string ans1, std::string ans2, std::string ans3, std::string ans4);
-void generateList(std::string ans1, std::string ans2, std::string ans3, std::string ans4);
