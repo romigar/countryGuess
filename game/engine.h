@@ -19,6 +19,10 @@ class engine : public gameSettings
     Q_PROPERTY(int countriesFound READ getCountriesFound WRITE setCountriesFound NOTIFY countriesFoundChanged)
     Q_PROPERTY(QString rightAnswer READ getRightAnswer WRITE setRightAnswer NOTIFY rightAnswerChanged)
     Q_PROPERTY(QString question READ getQuestion WRITE setQuestion NOTIFY questionChanged)
+    Q_PROPERTY(bool questionFinished READ getQuestionFinished WRITE setQuestionFinished NOTIFY questionFinishedChanged)
+    Q_PROPERTY(bool displayGood READ getDisplayGood WRITE setDisplayGood NOTIFY displayGoodChanged)
+    Q_PROPERTY(bool squareJokerActivated READ getSquareJokerActivated WRITE setSquareJokerActivated NOTIFY squareJokerActivatedChanged)
+
 
     Q_PROPERTY(QString squareAnswer1 READ getSquareAnswer1 WRITE setSquareAnswer1 NOTIFY squareAnswer1Changed)
     Q_PROPERTY(QString squareAnswer2 READ getSquareAnswer2 WRITE setSquareAnswer2 NOTIFY squareAnswer2Changed)
@@ -39,6 +43,9 @@ public:
     int chrono;
     int timeRemaining;
     int countriesFound;
+    bool questionFinished;
+    bool displayGood;
+    bool squareJokerActivated;
 
     QString squareAnswer1;
     QString squareAnswer2;
@@ -52,14 +59,12 @@ public:
     int getCountriesFound(void);
     QString getRightAnswer(void);
     QString getQuestion(void);
-
     void setScore(int val);
     void setChrono(int val);
     void setTimeRemaining(int val);
     void setCountriesFound(int val);
     void setRightAnswer(QString val);
     void setQuestion(QString val);
-
     QString getSquareAnswer1(void);
     void setSquareAnswer1(QString answer);
     QString getSquareAnswer2(void);
@@ -68,8 +73,15 @@ public:
     void setSquareAnswer3(QString answer);
     QString getSquareAnswer4(void);
     void setSquareAnswer4(QString answer);
+    bool getQuestionFinished(void);
+    void setQuestionFinished(bool val);
+    bool getDisplayGood(void);
+    void setDisplayGood(bool val);
+    void setSquareJokerActivated(bool val);
+    bool getSquareJokerActivated(void);
 
-    void setNewQuestion();
+    void setNewQuestion(void);
+
 
 signals:
     void goodAnswer(int points);
@@ -84,13 +96,17 @@ signals:
     void squareAnswer2Changed();
     void squareAnswer3Changed();
     void squareAnswer4Changed();
-
+    void questionFinishedChanged();
+    void displayGoodChanged();
+    void squareJokerActivatedChanged();
 
 public slots:
     void onGoodAnswer(int points);
     void onBadAnswer(int points);
-    void onJokerAsked();
-    void onButtonAnswerClicked(QString answer, int points);
+    void onJokerAsked(void);
+    void onButtonAnswerClicked(QString answer);
+    void onButtonNextClicked(void);
+
 
 private:
 };

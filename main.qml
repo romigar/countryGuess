@@ -30,6 +30,7 @@ Window {
         x: 308
         y: 0
         text: qsTr("Score")
+        anchors.horizontalCenter: parent.horizontalCenter
         font.pixelSize: 12
     }
 
@@ -45,6 +46,7 @@ Window {
         id: textQuestion
         x: 291
         y: 97
+        color: colorResult.color
         text: myEngine.question
         anchors.horizontalCenterOffset: 3
         anchors.horizontalCenter: parent.horizontalCenter
@@ -58,29 +60,34 @@ Window {
         width: 150
         height: 32
         text: qsTr("Valider")
-        onClicked: myEngine.onButtonAnswerClicked(textFieldAnswer.text, 1)
+        onClicked: myEngine.onButtonAnswerClicked(textFieldAnswer.text)
         anchors.horizontalCenter: parent.horizontalCenter
+        visible: (!myEngine.questionFinished) && (!myEngine.squareJokerActivated)
     }
 
     Button {
+        id: buttonNext
+        x: 248
+        y: 252
+        width: 150
+        height: 32
+        text: qsTr("Question suivante")
+        onClicked: myEngine.onButtonNextClicked()
+        anchors.horizontalCenter: parent.horizontalCenter
+        visible: myEngine.questionFinished
+    }
+
+
+    Button {
         id: buttonSquare
-        x: 15
-        y: 322
+        x: 38
+        y: 318
         width: 147
         height: 27
         onClicked: myEngine.onJokerAsked()
         text: qsTr("Carré")
-    }
-
-    Text {
-        id: textPropositions
-        x: 15
-        y: 348
-        width: 113
-        height: 24
-        text: qsTr("Propositions carré")
-        font.pixelSize: 12
-        visible: myEngine.squareJokerActivated
+        anchors.horizontalCenter: parent.horizontalCenter
+        visible: (!myEngine.questionFinished) && (!myEngine.squareJokerActivated)
     }
 
     Text {
@@ -96,7 +103,9 @@ Window {
         x: 287
         y: 15
         text: myEngine.score
-        font.pixelSize: 12
+        anchors.horizontalCenter: parent.horizontalCenter
+        lineHeight: 1
+        font.pixelSize: 30
     }
 
     Text {
@@ -104,10 +113,11 @@ Window {
         x: 314
         y: 132
         text: myEngine.rightAnswer
+        color: colorResult.color
         anchors.horizontalCenterOffset: 0
         anchors.horizontalCenter: parent.horizontalCenter
         font.pixelSize: 20
-        visible: myEngine.visibleRightAnswer
+        visible: myEngine.questionFinished
     }
 
     TextField {
@@ -116,7 +126,107 @@ Window {
         y: 176
         width: 248
         height: 25
-        text: "entrer une réponse"
-        placeholderText: qsTr("Text Field")
+        text: if (!myEngine.questionFinished) ""
+        anchors.horizontalCenter: parent.horizontalCenter
+        placeholderText: qsTr("Capitale")
+        visible: !myEngine.squareJokerActivated
     }
+
+    Text {
+        id: colorResult
+        color: if (myEngine.questionFinished) {
+                   if( myEngine.displayGood)
+                       "#00cc00"
+                   else "#cc0000"
+               } else
+                   "#000000"
+
+        visible: false
+    }
+
+    Text {
+        id: testResult
+        x: 308
+        y: 219
+        text: if( myEngine.displayGood)
+                  qsTr("Bonne réponse")
+              else qsTr("Mauvaise réponse")
+        anchors.horizontalCenterOffset: 0
+        color: colorResult.color
+        anchors.horizontalCenter: parent.horizontalCenter
+        font.pixelSize: 16
+        visible: myEngine.questionFinished
+    }
+
+    Button {
+        id: buttonSquare1
+        x: 108
+        y: 176
+        text: myEngine.squareAnswer1
+        anchors.verticalCenterOffset: -52
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.horizontalCenterOffset: -110
+        anchors.horizontalCenter: parent.horizontalCenter
+        visible: myEngine.squareJokerActivated
+        onClicked: myEngine.onButtonAnswerClicked(myEngine.squareAnswer1)
+        enabled: !myEngine.questionFinished
+    }
+
+    Button {
+        id: buttonSquare2
+        y: 378
+        text: myEngine.squareAnswer2
+        anchors.verticalCenterOffset: -52
+        anchors.horizontalCenterOffset: 143
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.horizontalCenter: parent.horizontalCenter
+        visible: myEngine.squareJokerActivated
+        onClicked: myEngine.onButtonAnswerClicked(myEngine.squareAnswer2)
+        enabled: !myEngine.questionFinished
+    }
+
+    Button {
+        id: buttonSquare3
+        x: 349
+        y: 219
+        text: myEngine.squareAnswer3
+        anchors.verticalCenterOffset: -7
+        anchors.horizontalCenterOffset: -109
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.horizontalCenter: parent.horizontalCenter
+        visible: myEngine.squareJokerActivated
+        onClicked: myEngine.onButtonAnswerClicked(myEngine.squareAnswer3)
+        enabled: !myEngine.questionFinished
+    }
+
+    Button {
+        id: buttonSquare4
+        x: 360
+        y: 411
+        text: myEngine.squareAnswer4
+        anchors.verticalCenterOffset: -7
+        anchors.horizontalCenterOffset: 143
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
+        visible: myEngine.squareJokerActivated
+        onClicked: myEngine.onButtonAnswerClicked(myEngine.squareAnswer4)
+        enabled: !myEngine.questionFinished
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+/*##^## Designer {
+    D{i:8;anchors_x:38}D{i:15;anchors_y:378}D{i:16;anchors_y:378}D{i:17;anchors_x:349;anchors_y:378}
+D{i:18;anchors_x:120;anchors_y:411}
+}
+ ##^##*/

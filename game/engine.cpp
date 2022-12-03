@@ -28,6 +28,9 @@ engine::engine(gameSettings *parent)
     setCountriesFound(0);
     setScore(0);
     setNewQuestion();
+    setQuestionFinished(0);
+    setDisplayGood(0);
+    setSquareJokerActivated(0);
 
 
 }
@@ -36,6 +39,9 @@ engine::engine(gameSettings *parent)
 
 void engine::setNewQuestion(void)
 {
+    setQuestionFinished(false);
+    setDisplayGood(0);
+    setSquareJokerActivated(0);
     if (m_continent->list.empty()){
         std::cout<<"Empty list"<<std::endl;
         return;
@@ -50,11 +56,12 @@ void engine::setNewQuestion(void)
 
 /* ***************************************************************** */
 
-void engine::onButtonAnswerClicked(QString answer, int points)
+void engine::onButtonAnswerClicked(QString answer)
 {
     std::cout<<"Answer : "<< answer.toStdString() <<std::endl;
     std::cout<<"RightAnswer : "<< rightAnswer.toStdString() <<std::endl;
-
+    setQuestionFinished(true);
+    int points = square->getActivated() ? 3 : 5;
 
     if (validDistance(rightAnswer.toLocal8Bit(),answer.toLocal8Bit(),0.3)) {
         std::cout<<"Bonne réponse"  <<std::endl;
@@ -62,17 +69,21 @@ void engine::onButtonAnswerClicked(QString answer, int points)
     }
     else {
         std::cout<<"Mauvaise réponse"  <<std::endl;
-
         emit badAnswer(points);
     }
 }
 
 /* ***************************************************************** */
 
+void engine::onButtonNextClicked(void)
+{
+    setNewQuestion();
+}
+
+
 void engine::onBadAnswer(int points)
 {
     setScore(score-points);
-    //afficher bonne réponse
 }
 
 /* ***************************************************************** */
@@ -82,10 +93,8 @@ void engine::onGoodAnswer(int points)
     setScore(score+points);
     setCountriesFound(getCountriesFound()+1);
 
-    std::cout<<"Score : "<< +score  <<std::endl;
-    std::cout<<"Nombre de capitales trouvées : "<< +getCountriesFound()<<std::endl;
-
     //afficher bonne réponse
+    setDisplayGood(1);
 }
 
 /* ***************************************************************** */
@@ -94,12 +103,18 @@ void engine::onJokerAsked(void)
 {
     std::cout<<"Joker asked : "<<std::endl;
 
-    std::string ans1 = m_continent->list.at(0).getName();
-    std::string ans2 = m_continent->list.at(1).getName();
-    std::string ans3 = m_continent->list.at(2).getName();
+    setSquareJokerActivated(1);
+
+
+    std::string ans1 = m_continent->list.at(0).capital->getName();
+    std::string ans2 = m_continent->list.at(1).capital->getName();
+    std::string ans3 = m_continent->list.at(2).capital->getName();
     square->activateSquareJoker(ans1,ans2,ans3,rightAnswer.toStdString());
 
-    //TODO : display list on buttons
+    setSquareAnswer1(QString::fromStdString(square->squareList.at(0)));
+    setSquareAnswer2(QString::fromStdString(square->squareList.at(1)));
+    setSquareAnswer3(QString::fromStdString(square->squareList.at(2)));
+    setSquareAnswer4(QString::fromStdString(square->squareList.at(3)));
 }
 
 /* ***************************************************************** */
@@ -114,7 +129,17 @@ QString engine::getSquareAnswer1(void){ return squareAnswer1; }
 QString engine::getSquareAnswer2(void){ return squareAnswer2; }
 QString engine::getSquareAnswer3(void){ return squareAnswer3; }
 QString engine::getSquareAnswer4(void){ return squareAnswer4; }
+bool engine::getQuestionFinished(void){ return questionFinished; }
+bool engine::getDisplayGood(void){ return displayGood; }
+bool engine::getSquareJokerActivated(void){ return squareJokerActivated;}
 
+/* ***************************************************************** */
+
+void engine::setQuestionFinished(bool val)
+{
+    questionFinished = val;
+    emit questionFinishedChanged();
+}
 
 /* ***************************************************************** */
 
@@ -197,3 +222,21 @@ void engine::setSquareAnswer4(QString answer)
 }
 
 /* ***************************************************************** */
+
+void engine::setDisplayGood(bool val)
+{
+    displayGood = val;
+    emit displayGoodChanged();
+}
+
+/* ***************************************************************** */
+
+void engine::setSquareJokerActivated(bool val)
+{
+    squareJokerActivated = val;
+    emit squareJokerActivatedChanged();
+}
+
+/* ***************************************************************** */
+
+
