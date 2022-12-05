@@ -15,7 +15,7 @@
 void fill_from_csv(std::vector<country> *_countryList)
 {
     // Location file
-    QFile envFile("/home/theo/workspace/countryGuess/ressources/liste.csv");
+    QFile envFile(":/ressources/liste.csv");
     int i = 0 ; //country counter
     if (envFile.open(QIODevice::ReadOnly)) {
         QTextStream in(&envFile);
