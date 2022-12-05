@@ -127,6 +127,7 @@ Window {
         width: 248
         height: 25
         text: if (!myEngine.questionFinished) ""
+        maximumLength: 40
         anchors.horizontalCenter: parent.horizontalCenter
         placeholderText: qsTr("Capitale")
         visible: !myEngine.squareJokerActivated
