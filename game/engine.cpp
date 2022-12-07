@@ -39,9 +39,9 @@ engine::engine(gameSettings *parent)
 
 void engine::setNewQuestion(void)
 {
-    setQuestionFinished(false);
     setDisplayGood(0);
     setSquareJokerActivated(0);
+    setQuestionFinished(false);
     if (m_continent->list.empty()){
         std::cout<<"Empty list"<<std::endl;
         return;

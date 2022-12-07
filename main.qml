@@ -1,6 +1,6 @@
 import QtQuick 2.9
 import QtQuick.Window 2.2
-import QtQuick.Controls 1.6
+import QtQuick.Controls 2.1
 
 import Engine 1.0
 
@@ -126,7 +126,7 @@ Window {
         y: 176
         width: 248
         height: 25
-        text: if (!myEngine.questionFinished) ""
+        text: if (!myEngine.questionFinished) {qsTr("")}
         maximumLength: 40
         anchors.horizontalCenter: parent.horizontalCenter
         placeholderText: qsTr("Capitale")
@@ -163,34 +163,51 @@ Window {
         id: buttonSquare1
         x: 108
         y: 176
-        text: myEngine.squareAnswer1
         anchors.verticalCenterOffset: -52
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenterOffset: -160
         anchors.horizontalCenter: parent.horizontalCenter
         visible: myEngine.squareJokerActivated
-        onClicked: myEngine.onButtonAnswerClicked(myEngine.squareAnswer1)
+        onClicked: onSquareClicked(this)
         enabled: !myEngine.questionFinished
+        contentItem: Text {
+                text: myEngine.squareAnswer1
+                color: if (buttonSquare1.enabled) {"black"}
+                       else { if(buttonSquare1.contentItem.text === myEngine.rightAnswer){"#00cc00"}
+                           else "#cc0000" }
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                elide: Text.ElideRight
+                anchors.fill: parent
+            }
     }
 
     Button {
         id: buttonSquare2
         y: 378
-        text: myEngine.squareAnswer2
         anchors.verticalCenterOffset: -52
         anchors.horizontalCenterOffset: 160
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
         visible: myEngine.squareJokerActivated
-        onClicked: myEngine.onButtonAnswerClicked(myEngine.squareAnswer2)
+        onClicked: onSquareClicked(this)
         enabled: !myEngine.questionFinished
+        contentItem: Text {
+                text: myEngine.squareAnswer2
+                color: if (buttonSquare2.enabled) {"black"}
+                       else { if(buttonSquare2.contentItem.text === myEngine.rightAnswer){"#00cc00"}
+                           else "#cc0000" }
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                elide: Text.ElideRight
+                anchors.fill: parent
+            }
     }
 
     Button {
         id: buttonSquare3
         x: 349
         y: 219
-        text: myEngine.squareAnswer3
         anchors.verticalCenterOffset: -7
         anchors.horizontalCenterOffset: -160
         anchors.verticalCenter: parent.verticalCenter
@@ -198,6 +215,16 @@ Window {
         visible: myEngine.squareJokerActivated
         onClicked: myEngine.onButtonAnswerClicked(myEngine.squareAnswer3)
         enabled: !myEngine.questionFinished
+        contentItem: Text {
+                text: myEngine.squareAnswer3
+                color: if (buttonSquare3.enabled) {"black"}
+                       else { if(buttonSquare3.contentItem.text === myEngine.rightAnswer){"#00cc00"}
+                           else "#cc0000" }
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                elide: Text.ElideRight
+                anchors.fill: parent
+            }
     }
 
     Button {
@@ -212,13 +239,27 @@ Window {
         visible: myEngine.squareJokerActivated
         onClicked: myEngine.onButtonAnswerClicked(myEngine.squareAnswer4)
         enabled: !myEngine.questionFinished
+        contentItem: Text {
+                text: myEngine.squareAnswer4
+                color: if (buttonSquare4.enabled) {"black"}
+                       else { if(buttonSquare4.contentItem.text === myEngine.rightAnswer){"#00cc00"}
+                           else "#cc0000" }
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                elide: Text.ElideRight
+                anchors.fill: parent
+            }
+    }
+
+    function onSquareClicked(item){
+        myEngine.onButtonAnswerClicked(item.contentItem.text)
     }
 
 }
 
 
-/*##^## Designer {
-    D{i:8;anchors_x:38}D{i:15;anchors_y:378}D{i:16;anchors_y:378}D{i:17;anchors_x:349;anchors_y:378}
-D{i:18;anchors_x:120;anchors_y:411}
-}
- ##^##*/
+
+
+
+
+
