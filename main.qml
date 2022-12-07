@@ -166,7 +166,7 @@ Window {
         text: myEngine.squareAnswer1
         anchors.verticalCenterOffset: -52
         anchors.verticalCenter: parent.verticalCenter
-        anchors.horizontalCenterOffset: -110
+        anchors.horizontalCenterOffset: -160
         anchors.horizontalCenter: parent.horizontalCenter
         visible: myEngine.squareJokerActivated
         onClicked: myEngine.onButtonAnswerClicked(myEngine.squareAnswer1)
@@ -178,7 +178,7 @@ Window {
         y: 378
         text: myEngine.squareAnswer2
         anchors.verticalCenterOffset: -52
-        anchors.horizontalCenterOffset: 143
+        anchors.horizontalCenterOffset: 160
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
         visible: myEngine.squareJokerActivated
@@ -192,7 +192,7 @@ Window {
         y: 219
         text: myEngine.squareAnswer3
         anchors.verticalCenterOffset: -7
-        anchors.horizontalCenterOffset: -109
+        anchors.horizontalCenterOffset: -160
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
         visible: myEngine.squareJokerActivated
@@ -206,7 +206,7 @@ Window {
         y: 411
         text: myEngine.squareAnswer4
         anchors.verticalCenterOffset: -7
-        anchors.horizontalCenterOffset: 143
+        anchors.horizontalCenterOffset: 160
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
         visible: myEngine.squareJokerActivated
@@ -215,15 +215,6 @@ Window {
     }
 
 }
-
-
-
-
-
-
-
-
-
 
 
 /*##^## Designer {
