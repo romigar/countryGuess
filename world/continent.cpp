@@ -40,10 +40,10 @@ continent::continent(std::string _name, uint8_t _id, std::vector<country> _list)
 /* ***************************************************************** */
 
 // geter and seter method
-inline uint8_t continent::getId(void){   return id;  }
-inline void continent::setId(uint8_t newId){    id = newId;  }
-inline std::string continent::getName(void){    return name; }
-inline void continent::setName(std::string newName){    name = newName;  }
+inline uint8_t continent::getId(void) const{   return id;  }
+inline void continent::setId(const uint8_t newId){    id = newId;  }
+inline std::string continent::getName (void) const{    return name; }
+inline void continent::setName(const std::string newName){    name = newName;  }
 
 /* ***************************************************************** */
 

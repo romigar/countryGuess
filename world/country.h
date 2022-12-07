@@ -23,16 +23,16 @@ public:
     uint8_t continentId;
     city* capital;
 
-    uint8_t getId(void);
-    void setId(uint8_t newId);
-    std::string getName(void);
-    void setName(std::string newName);
-    uint32_t getPopulation(void);
-    void setPopulation(uint32_t newPopulation);
-    std::string getContinent(void);
-    void setContinent(std::string newContinent);
-    uint8_t getContinentId(void);
-    void setContinentId(uint8_t newContinentId);
+    uint8_t getId(void) const;
+    void setId(const uint8_t newId);
+    std::string getName(void) const;
+    void setName(const std::string newName);
+    uint32_t getPopulation(void) const;
+    void setPopulation(const uint32_t newPopulation);
+    std::string getContinent(void) const;
+    void setContinent(const std::string newContinent);
+    uint8_t getContinentId(void) const;
+    void setContinentId(const uint8_t newContinentId);
 
     void display(void);
     void display_name(void);

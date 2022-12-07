@@ -15,12 +15,12 @@ public:
     uint8_t id;
     uint32_t population;
 
-    uint8_t getId(void);
-    void setId(uint8_t newId);
-    std::string getName(void);
-    void setName(std::string newName);
-    uint32_t getPopulation(void);
-    void setPopulation(uint32_t newPopulation);
+    uint8_t getId(void) const;
+    void setId(const uint8_t newId);
+    std::string getName(void) const;
+    void setName(const std::string newName);
+    uint32_t getPopulation(void) const;
+    void setPopulation(const uint32_t newPopulation);
     void display();
     void display_name();
 private:
