@@ -22,16 +22,16 @@ public:
     uint8_t countriesTotal;
     QString region;
 
-    uint32_t getBestScore(void);
-    uint32_t getTimeLimit(void);
-    uint8_t getCountriesTotal(void);
-    QString getBestScoreName(void);
-    QString getPlayerName(void);
-    void setBestScore(uint32_t val);
-    void setTimeLimit(uint32_t val);
-    void setCountriesTotal(uint8_t val);
-    void setBestScoreName(QString val);
-    void setPlayerName(QString val);
+    uint32_t getBestScore(void) const;
+    uint32_t getTimeLimit(void) const;
+    uint8_t getCountriesTotal(void) const;
+    QString getBestScoreName(void) const;
+    QString getPlayerName(void) const;
+    void setBestScore(const uint32_t val);
+    void setTimeLimit(const uint32_t val);
+    void setCountriesTotal(const uint8_t val);
+    void setBestScoreName(const QString val);
+    void setPlayerName(const QString val);
 
 signals:
     void bestScoreChanged();

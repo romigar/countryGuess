@@ -21,17 +21,11 @@ void squareJoker::generateList(std::string ans1, std::string ans2, std::string a
 
 /* ***************************************************************** */
 
-void squareJoker::setActivated(bool active)
-{
-    isActivated = active;
-}
+void squareJoker::setActivated(const bool active) { isActivated = active; }
 
 /* ***************************************************************** */
 
-bool squareJoker::getActivated(void)
-{
-    return isActivated;
-}
+bool squareJoker::getActivated(void) const { return isActivated; }
 
 /* ***************************************************************** */
 
