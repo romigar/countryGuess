@@ -71,6 +71,7 @@ void engine::setNewQuestion(void)
     m_continent->list.pop_back();
     setQuestion(QString::fromStdString(m_country->getName()));
     setRightAnswer(QString::fromStdString(m_country->capital->getName()));
+    RightAnswerContinent = QString::fromStdString(m_country->getContinent());
 }
 
 /* ***************************************************************** */
@@ -123,16 +124,46 @@ void engine::onButtonNewGameClicked(QString continentName)
     setNewGame(continentName);
 }
 
+static uint8_t getContinentId(const QString continentName, const world m_world)
+{
+    for (int i = 0 ; i< m_world.continentList.size(); i++)
+    {
+        if (QString::fromStdString(m_world.continentList.at(i).getName()) == continentName) {
+            return m_world.continentList.at(i).getId();
+        }
+    }
+    return 0;
+}
+
+static bool hasDouble4(const QString str1, const QString str2, QString str3, const QString str4)
+{
+    return ( (str1 == str2) || (str1 == str3) || (str1 == str4) ||
+             (str2 == str3) || (str2 == str4) || (str3 == str4));
+}
+
 void engine::onJokerAsked(void)
 {
     std::cout<<"Joker asked : "<<std::endl;
-
     setSquareJokerActivated(1);
-
-
-    std::string ans1 = m_continent->list.at(0).capital->getName();
-    std::string ans2 = m_continent->list.at(1).capital->getName();
-    std::string ans3 = m_continent->list.at(2).capital->getName();
+    // Pick 3 capital from the same continent
+    uint8_t id = getContinentId(RightAnswerContinent,*m_world);
+    uint8_t size = m_world->continentList.at(id).list.size();
+    bool hasDouble = true;
+    int i  = std::rand()%size;
+    std::string ans1;
+    std::string ans2;
+    std::string ans3;
+    // Check if all 4 answers are different
+    while(hasDouble){
+        i  = std::rand()%size;
+        ans1 = m_world->continentList.at(id).list.at(i).capital->getName();
+        i  = std::rand()%size;
+        ans2 = m_world->continentList.at(id).list.at(i).capital->getName();
+        i  = std::rand()%size;
+        ans3 = m_world->continentList.at(id).list.at(i).capital->getName();
+        hasDouble = hasDouble4(QString::fromStdString(ans1),QString::fromStdString(ans2)
+                            ,QString::fromStdString(ans3),rightAnswer);
+    }
     square->activateSquareJoker(ans1,ans2,ans3,rightAnswer.toStdString());
 
     setSquareAnswer1(QString::fromStdString(square->squareList.at(0)));

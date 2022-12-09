@@ -38,6 +38,7 @@ public:
     country* m_country;
     QString question;
     QString rightAnswer;
+    QString RightAnswerContinent;
 
     int score;
     int chrono;
