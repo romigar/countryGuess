@@ -248,7 +248,34 @@ Window {
                 verticalAlignment: Text.AlignVCenter
                 elide: Text.ElideRight
                 anchors.fill: parent
-            }
+        }
+    }
+
+    Button {
+        id: buttonNewGame
+        text: qsTr("Nouvelle partie")
+        anchors.top: parent.top
+        anchors.topMargin: 63
+        anchors.left: parent.left
+        anchors.leftMargin: 8
+        onClicked: myEngine.onButtonNewGameClicked(comboBoxContinent.currentText)
+    }
+
+    ComboBox {
+        id: comboBoxContinent
+        anchors.top: parent.top
+        anchors.topMargin: 17
+        anchors.left: parent.left
+        anchors.leftMargin: 8
+        model: ListModel {
+            id: model
+            ListElement { text: "Monde" }
+            ListElement { text: "Asie" }
+            ListElement { text: "Afrique" }
+            ListElement { text: "Amérique" }
+            ListElement { text: "Europe" }
+            ListElement { text: "Océanie" }
+        }
     }
 
     function onSquareClicked(item){
@@ -263,3 +290,8 @@ Window {
 
 
 
+
+/*##^## Designer {
+    D{i:23;anchors_x:8;anchors_y:63}D{i:24;anchors_x:8;anchors_y:17}
+}
+ ##^##*/

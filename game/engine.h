@@ -81,6 +81,8 @@ public:
     bool getSquareJokerActivated(void);
 
     void setNewQuestion(void);
+    void setNewGame(QString continentName);
+
 
 
 signals:
@@ -106,6 +108,7 @@ public slots:
     void onJokerAsked(void);
     void onButtonAnswerClicked(QString answer);
     void onButtonNextClicked(void);
+    void onButtonNewGameClicked(QString continentName);
 
 
 private:

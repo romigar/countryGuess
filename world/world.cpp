@@ -69,9 +69,10 @@ void fillList(std::vector<country> countrylist,std::vector<continent> *_continen
             newContList.push_back(newContinent);
         }
     }
+    _continentList->push_back(*new continent("Monde",0,countrylist));
     // Init the continentList with the created lists
     for (int k = 0; k < newContList.size(); k++) {
-        _continentList->push_back(*new continent(newContList.at(k).at(0).getContinent(),k,newContList.at(k)));
+        _continentList->push_back(*new continent(newContList.at(k).at(0).getContinent(),k+1,newContList.at(k)));
     }
 }
 

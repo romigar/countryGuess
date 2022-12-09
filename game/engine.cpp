@@ -17,10 +17,9 @@ engine::engine(gameSettings *parent)
     : gameSettings(parent)
     , square(new squareJoker())
     , m_world(new world())
-    , m_continent(new continent(m_world->continentList.at(0)))
+    , m_continent(new continent())
     , m_country(new country())
 {
-
     connect(this, SIGNAL(goodAnswer(int)), this, SLOT(onGoodAnswer(int)));
     connect(this, SIGNAL(badAnswer(int)), this, SLOT(onBadAnswer(int)));
     setChrono(0);
@@ -31,8 +30,28 @@ engine::engine(gameSettings *parent)
     setQuestionFinished(0);
     setDisplayGood(0);
     setSquareJokerActivated(0);
+}
 
+/* ***************************************************************** */
 
+void engine::setNewGame(QString continentName)
+{
+    std::cout<< "selected: "<<continentName.toStdString()<<std::endl;
+
+    for (int i = 0; i < m_world->continentList.size() ; i++) {
+        if (QString::fromStdString(m_world->continentList.at(i).name) == continentName){
+            *m_continent = m_world->continentList.at(i);
+            break;
+        }
+    }
+    setChrono(0);
+    setTimeRemaining(0);
+    setCountriesFound(0);
+    setScore(0);
+    setNewQuestion();
+    setQuestionFinished(0);
+    setDisplayGood(0);
+    setSquareJokerActivated(0);
 }
 
 /* ***************************************************************** */
@@ -98,6 +117,11 @@ void engine::onGoodAnswer(int points)
 }
 
 /* ***************************************************************** */
+
+void engine::onButtonNewGameClicked(QString continentName)
+{
+    setNewGame(continentName);
+}
 
 void engine::onJokerAsked(void)
 {
