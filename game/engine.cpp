@@ -83,7 +83,7 @@ void engine::onButtonAnswerClicked(QString answer)
     setQuestionFinished(true);
     int points = square->getActivated() ? 3 : 5;
 
-    if (validDistance(rightAnswer.toLocal8Bit(),answer.toLocal8Bit(),0.3)) {
+    if (validDistance(rightAnswer.toStdString(),answer.toStdString(),0.4)) {
         std::cout<<"Bonne réponse"  <<std::endl;
         emit goodAnswer(points);
     }

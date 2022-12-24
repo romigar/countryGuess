@@ -67,16 +67,95 @@ uint32_t DistanceDeDamerauLevenshtein(QByteArray reference, QByteArray candidat)
 }
 
 
+
+static uint32_t distanceDamerauLevenshtein(const char* str1,const int size1,const char* str2,const int size2)
+{
+    std::cout<< "size1 : " << size1 << std::endl;
+    std::cout<< "size2 : " << size2 << std::endl;
+    int i = 0;
+    int j = 0;
+    int coutSubstitution = 0;
+    int d[size1+1][size2+1];
+
+
+
+    std::cout<<"_ | _ ";
+    for (i = 0; i < size1 ; i++) {
+        std::cout<<str1[i]<<" ";
+    }
+    std::cout<<" |"<<std::endl;
+    std::cout<<"_ | ";
+    i=0;
+
+    for (i = 0; i <= size1 ; i++) {
+        d[i][0] = i;
+        std::cout<<d[i][j]<<" ";
+
+    }
+    std::cout<<" |"<<std::endl;
+
+    for (j = 0; j <= size2 ; j++) {
+        d[0][j] = j;
+    }
+
+    for ( j = 1 ; j <= size2 ; j++)
+    {
+        std::cout<<str2[j-1]<<" | ";
+        std::cout<<d[0][j]<<" ";
+        for (i = 1; i <= size1 ; i++)
+        {
+            if (str1[i-1] == str2[j-1]){
+                coutSubstitution = 0;
+            }
+            else {
+                coutSubstitution = 1;
+            }
+
+            d[i][j] = std::min( d[i-1][j] + 1 ,
+                      std::min( d[i][j-1] + 1 ,
+                        d[i-1][j-1] + coutSubstitution ));
+
+
+            // transposition
+            if ( (i > 1 && j > 1)
+                 && (str1[i-1] == str2[j-2])
+                 && (str1[i-2] == str2[j-1]) ) {
+                d[i][j] = std::min( d[i][j] , d[i-2][j-2] + coutSubstitution);
+            }
+            std::cout<<d[i][j]<<" ";
+        }
+        std::cout<<" |"<<std::endl;
+    }
+    std::cout<<d[size1][size2]<<std::endl;
+    return d[size1][size2];
+}
+
+
+
 bool result(QByteArray word1, QByteArray word2)
 {
     std::cout<< word1.constData() << "|" << word2.constData() << std::endl;
-
-
 
     float tolerance = 0.2;
     float result;
     int distance = DistanceDeDamerauLevenshtein(word1,word2);
     result = (float)distance/qMin(word1.size(),word2.size());
+
+    if (result >= tolerance)
+        std::cout<< "refused " << result << std::endl;
+    else {
+        std::cout<< "accepted " << result << std::endl;
+    }
+}
+
+bool result(std::string word1, std::string word2)
+{
+    std::cout<< word1 << "|" << word2 << std::endl;
+
+    float tolerance = 0.2;
+    float result;
+    int distance = distanceDamerauLevenshtein(word1.data(),word1.size(),word2.data(),word2.size());
+    result = (float)distance/qMin(sizeof(word1),sizeof(word2));
 
     if (result >= tolerance)
         std::cout<< "refused " << result << std::endl;
@@ -114,51 +193,18 @@ int main(int argc, char *argv[])
 
     std::cout<< "start"<<std::endl;
 
-//    result("iran","irna");
-//    result("iran","ir");
-/*
-    std::srand ( unsigned ( std::time(0) ) );
-    std::list<std::string> list = { "blue", "red", "green" };
-    std::cout<<list;
-    std::random_shuffle(list.begin(),list.end(),myrandom);
-    */
-/*
-    std::vector<int> list {1,2,3,4,5,6,7,8,9,10};
-
-    std::cout<< list.size() << std::endl;
-    std::random_shuffle(list.begin(),list.end(),myrandom);
-    std::cout<< list << std::endl;
-    list.erase(list.begin()+2);
-    list.erase(list.begin()+2);
-    list.erase(list.begin()+2);
-    list.erase(list.begin()+2);
-    list.erase(list.begin()+2);
-    std::cout<< list << std::endl;
-    std::cout<< list.size() << std::endl;
-    std::cout<< "end"<<std::endl;
-    */
-
-    std::srand(std::time(nullptr)); // use current time as seed for random generator
+    std::string str1 = "salutations";
+    std::string str2 = "salutatoins";
+    std::string str3 = "salutatoin";
+    std::string str4 = "salutatain";
 
 
+    result(str1,str1);
+    result(str1,str2);
+    result(str1,str3);
+    result(str1,str4);
 
 
-    city marseille(1,"Marseille",300000);
-    city londres(2,"Londres",500000);
-    city madrid(3,"Madrid",400000);
-    country france(0,"France",70000000,"Europe",marseille);
-    country espagne(0,"Espagne",50000000,"Europe",city(3,"Madrid",400000));
-    country angleterre(0,"Angleterre",60000000,"Europe",marseille);
-    std::vector<country> list {france,espagne,angleterre};
-    continent europe("Europe",2,list);
-    europe.display();
-    europe.display_list_country_name();
-
-    marseille = londres;
-    france = espagne;
-
-    std::random_shuffle(europe.list.begin(),europe.list.end());
-    europe.display_list_country_name();
-    return a.exec();
+    return 0;
 }
 
