@@ -30,12 +30,12 @@ city::~city(){ }
 
 /* ***************************************************************** */
 
-inline uint8_t city::getId(void) const{   return id;  }
-inline std::string city::getName(void) const{   return name;  }
-inline uint32_t city::getPopulation(void) const{   return population;  }
-inline void city::setPopulation(uint32_t newPopulation){   population = newPopulation;  }
-inline void city::setName(std::string newName){   name = newName;  }
-inline void city::setId(uint8_t newId){   id = newId;  }
+uint8_t city::getId(void) const{   return id;  }
+std::string city::getName(void) const{   return name;  }
+uint32_t city::getPopulation(void) const{   return population;  }
+void city::setPopulation(uint32_t newPopulation){   population = newPopulation;  }
+void city::setName(std::string newName){   name = newName;  }
+void city::setId(uint8_t newId){   id = newId;  }
 
 /* ***************************************************************** */
 
